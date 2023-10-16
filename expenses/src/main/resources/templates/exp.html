@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Management</title>
+</head>
+<body>
+<div>
+  <h3>Upload Multiple Files</h3>
+  <form id="uploadFiles" name="uploadFiles" method="post" th:action="@{/uploadFile}" enctype="multipart/form-data">
+  <input type="file" name="files" multiple required/>
+    <button type="submit">Upload</button>
+  </form>
+</div>
+<div>
+  <h3>List of Expenses</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Download</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="exp : ${exps}">
+      <td th:text="${exp.id}"></td>
+      <td th:text="${exp.fileName}"></td>
+      <td>
+        <a th:href="@{'/downloadFile/' + ${exp.id}}">Download</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
